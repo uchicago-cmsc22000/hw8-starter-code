@@ -1,4 +1,4 @@
-FROM gcc
+FROM gcc:5.4
 
 COPY module /tmp/module
 COPY RedisModulesSDK /tmp/RedisModulesSDK
