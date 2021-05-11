@@ -4,9 +4,9 @@ LDFLAGS = -L../hiredis/
 RM = rm -f
 LDLIBS = -l:libhiredis.a
 
-SRCS = test-hgetset.c
+SRCS = sample-redis.c
 OBJS = $(SRCS:.c=.o)
-BIN = test-hgetset
+BIN = sample-redis
 
 .PHONY: all
 all: ${BIN}

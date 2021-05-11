@@ -32,12 +32,7 @@ int main(int argc, char **argv) {
     printf("HSET: %s\n", reply->str);
     freeReplyObject(reply);
 
-    /* Use HGETSET */
-    reply = redisCommand(c,"EXAMPLE.HGETSET %s %s %s", "myhash", "name", "Alan T. Foobar");
-    printf("HGETSET: %s\n", reply->str);
-    freeReplyObject(reply);
-
-    /* Use HGET on the key we just HGETSET'd */
+    /* Use HGET on the key we just HSET'd */
     reply = redisCommand(c,"HGET %s %s", "myhash", "name");
     printf("HGET: %s\n", reply->str);
     freeReplyObject(reply);
