@@ -1,12 +1,17 @@
-FROM gcc:5.4
+FROM gcc:9.3
 
-COPY module /tmp/module
-COPY RedisModulesSDK /tmp/RedisModulesSDK
+# Download Redis
+WORKDIR /tmp
+RUN wget http://download.redis.io/redis-stable.tar.gz
+RUN tar xzf redis-stable.tar.gz
 
-RUN make -C /tmp/module/
+# Build and install Redis
+WORKDIR /tmp/redis-stable/
+RUN make
+RUN make install
 
-FROM redis
+# Clean up
+RUN rm -rf /tmp/redis-stable/ /tmp/redis-stable.tar.gz
 
-COPY --from=0 /tmp/module/module.so /usr/local/lib
-
-CMD ["redis-server", "--loadmodule", "/usr/local/lib/module.so"]
+# Command to run when container is launched
+CMD ["redis-server", "--bind", "0.0.0.0"]
