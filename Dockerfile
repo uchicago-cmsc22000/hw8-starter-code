@@ -14,4 +14,4 @@ RUN make install
 RUN rm -rf /tmp/redis-stable/ /tmp/redis-stable.tar.gz
 
 # Command to run when container is launched
-CMD ["redis-server", "--bind", "0.0.0.0"]
+CMD ["redis-server", "--protected-mode", "no", "--bind", "0.0.0.0"]
